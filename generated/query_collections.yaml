@@ -1,0 +1,19 @@
+- name: allowed-queries
+  definition:
+    queries:
+      - name: GetBook
+        query: |-
+          query GetBook {
+            book {
+              ...BookData
+            }
+          }
+          fragment BookData on Book {
+            name
+            author {
+              ...AuthorData
+            }
+          }
+          fragment AuthorData on Author {
+            name
+          }
