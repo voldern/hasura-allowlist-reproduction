@@ -1,5 +1,0 @@
-query GetBook {
-  book {
-    ...BookData
-  }
-}

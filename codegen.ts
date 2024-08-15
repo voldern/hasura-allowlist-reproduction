@@ -8,7 +8,7 @@ const config: CodegenConfig = {
       },
     },
   ],
-  documents: "queries/**/*.graphql",
+  documents: ["./queries/*.ts"],
   generates: {
     "./generated/query_collections.yaml": {
       plugins: ["hasura-allow-list"],
@@ -17,17 +17,19 @@ const config: CodegenConfig = {
         fragmentsOrder: "document",
       },
     },
-    "./generated/typed-document-node.ts": {
-      plugins: ["typescript", "typescript-operations", "typed-document-node"],
-    },
-    "generated/typescript-graphql.ts": {
-      plugins: [
-        "typescript",
-        "typescript-operations",
-        "typescript-graphql-request",
-      ],
+    "./generated/": {
+      preset: "client",
+      presetConfig: {
+        gqlTagName: "gql",
+      },
       config: {
         rawRequest: true,
+        enumsAsTypes: false,
+        strictScalars: true,
+        namingConvention: {
+          typeNames: "change-case-all#pascalCase",
+          enumValues: "change-case-all#upperCase",
+        },
       },
     },
   },

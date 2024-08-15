@@ -1,3 +1,0 @@
-fragment AuthorData on Author {
-  name
-}

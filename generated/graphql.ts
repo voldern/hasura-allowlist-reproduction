@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -32,14 +33,20 @@ export type Query = {
   book?: Maybe<Book>;
 };
 
-export type AuthorDataFragment = { __typename?: 'Author', name?: string | null };
+export type AuthorDataFragment = { __typename?: 'Author', name?: string | null } & { ' $fragmentName'?: 'AuthorDataFragment' };
 
-export type BookDataFragment = { __typename?: 'Book', name?: string | null, author?: { __typename?: 'Author', name?: string | null } | null };
+export type BookDataFragment = { __typename?: 'Book', name?: string | null, author?: (
+    { __typename?: 'Author' }
+    & { ' $fragmentRefs'?: { 'AuthorDataFragment': AuthorDataFragment } }
+  ) | null } & { ' $fragmentName'?: 'BookDataFragment' };
 
 export type GetBookQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBookQuery = { __typename?: 'Query', book?: { __typename?: 'Book', name?: string | null, author?: { __typename?: 'Author', name?: string | null } | null } | null };
+export type GetBookQuery = { __typename?: 'Query', book?: (
+    { __typename?: 'Book' }
+    & { ' $fragmentRefs'?: { 'BookDataFragment': BookDataFragment } }
+  ) | null };
 
 export const AuthorDataFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AuthorData"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Author"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]} as unknown as DocumentNode<AuthorDataFragment, unknown>;
 export const BookDataFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BookData"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Book"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AuthorData"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AuthorData"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Author"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]} as unknown as DocumentNode<BookDataFragment, unknown>;
